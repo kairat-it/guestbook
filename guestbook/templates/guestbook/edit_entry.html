@@ -2,10 +2,10 @@
 
 {% block content %}
     <h2>Редактировать запись</h2>
-    <form method="post">
+    <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Сохранить</button>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
-    <a href="{% url 'index' %}">Вернуться на главную</a>
+    <a href="{% url 'index' %}" class="btn btn-secondary mt-2">Вернуться на главную</a>
 {% endblock %}
