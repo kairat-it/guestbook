@@ -1,0 +1,14 @@
+{% extends 'guestbook/base.html' %}
+
+{% block content %}
+    <h2>Записи в гостевой книге</h2>
+    <ul>
+        {% for entry in entries %}
+            <li>
+                <strong>{{ entry.name_author }}</strong> ({{ entry.email_author }}):<br>
+                {{ entry.entry_text }}<br>
+                <small>Создано: {{ entry.created }}</small>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
