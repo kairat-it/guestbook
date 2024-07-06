@@ -1,6 +1,7 @@
 from django.db import models
 
 class GuestbookEntry(models.Model):
+    objects = None
     STATUS_CHOICES = [
         ('active', 'Активно'),
         ('blocked', 'Заблокировано'),

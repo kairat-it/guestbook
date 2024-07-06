@@ -1,0 +1,11 @@
+{% extends 'guestbook/base.html' %}
+
+{% block content %}
+    <h2>Новая запись</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить</button>
+    </form>
+    <a href="{% url 'index' %}">На главную</a>
+{% endblock %}
