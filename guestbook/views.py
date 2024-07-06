@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import GuestbookEntry
 from .forms import GuestbookEntryForm
 
@@ -16,3 +16,14 @@ def add_entry(request):
     else:
         form = GuestbookEntryForm()
     return render(request, 'guestbook/add_entry.html', {'form': form})
+
+def edit_entry(request, entry_id):
+    entry = get_object_or_404(GuestbookEntry, pk=entry_id)
+    if request.method == 'POST':
+        form = GuestbookEntryForm(request.POST, instance=entry)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = GuestbookEntryForm(instance=entry)
+    return render(request, 'guestbook/edit_entry.html', {'form': form})
