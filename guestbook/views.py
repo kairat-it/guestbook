@@ -27,3 +27,15 @@ def edit_entry(request, entry_id):
     else:
         form = GuestbookEntryForm(instance=entry)
     return render(request, 'guestbook/edit_entry.html', {'form': form})
+
+def delete_entry(request, entry_id):
+    entry = get_object_or_404(GuestbookEntry, pk=entry_id)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if email == entry.email_author:
+            entry.delete()
+            return redirect('index')
+        else:
+            error = "Неверная почта."
+            return render(request, 'guestbook/delete_entry.html', {'entry': entry, 'error': error})
+    return render(request, 'guestbook/delete_entry.html', {'entry': entry})
